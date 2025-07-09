@@ -1,32 +1,40 @@
-<script>
-export default {
-  // Properties returned from data() become reactive state
-  // and will be exposed on `this`.
-  data() {
-    return {
-      count: 0
-    }
-  },
+<script setup>
+import { ref, watch } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
-  // Methods are functions that mutate state and trigger updates.
-  // They can be bound as event handlers in templates.
-  methods: {
-    increment() {
-      this.count++
-    }
-  },
+onMounted(() => {
+  console.log('Component Count mounted')
+})
 
-  // Lifecycle hooks are called at different stages
-  // of a component's lifecycle.
-  // This function will be called when the component is mounted.
-  mounted() {
-    console.log(`The initial count is ${this.count}.`)
-  }
-}
+onUnmounted(() => {
+  console.log('Component Count unmounted')
+})
+
+const count = ref(0)
+
+watch(count, (newValue, oldValue) => {
+  console.log(`Count changed from ${oldValue} to ${newValue}`)
+})
 </script>
 
 <template>
-  <!-- <button @click="increment">Count is: {{ count }}</button> -->
-  <button @click="count++">Count is: {{ count }}</button>
-  <button @click="count = 0">Reset Count</button>
+  <div class="wrapper-comp">
+    <p>Count: {{ count }}</p>
+    <div class="buttons">
+      <button @click="count++">Increment</button>
+      <button @click="count = 0">Reset</button>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.buttons {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+
+  & button {
+    width: 100%;
+  }
+}
+</style>

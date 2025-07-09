@@ -1,35 +1,79 @@
 @import './base.css';
 
+code {
+  background-color: #f2f2f2;
+  font-size: 0.85rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+button {
+  background-color: #13773a;
+  color: #d0f8e0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: 0.25s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #0e5e2a;
+    scale: 1.01;
+  }
+
+  &:active {
+    scale: 0.99;
+  }
+}
+
+a {
+  color: #13773a;
+  text-decoration-color: #13773a;
+}
+
+/* REUSABLE */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.wrapper-comp {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  min-height: 10rem;
+  max-width: 35rem;
+}
+
+.sources {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #d0f8e0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+/*  */
+/*  */
+/*  */
+
 #app {
-  max-width: 1280px;
+  max-width: 75rem;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   font-weight: normal;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
 }

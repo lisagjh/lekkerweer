@@ -1,9 +1,21 @@
 <script setup>
-import Count from './components/Count.vue'
+  import Computed from './components/Computed.vue'
+  import Conditional from './components/Conditional.vue'
+  import Count from './components/Count.vue'
+  import Todo from './components/Todo.vue'
+  import TypingText from './components/TypingText.vue'
+  import Lifecycle from './components/Lifecycle.vue'
 </script>
 
 <template>
   <main>
-    <Count />
+    <div class="wrapper">
+      <Count />
+      <TypingText />
+      <Conditional />
+      <Todo />
+      <Computed />
+      <Lifecycle />
+    </div>
   </main>
 </template>

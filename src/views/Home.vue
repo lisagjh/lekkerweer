@@ -1,11 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const city = ref('Amsterdam')
+let city = ref('Amsterdam')
 const weather = ref(null)
 const loading = ref(true)
-
-console.log('API Key:', import.meta.env.VITE_API_KEY)
 
 const KEY = import.meta.env.VITE_API_KEY
 
@@ -30,6 +28,8 @@ onMounted(fetchWeather)
 <template>
   <main>
     <h1>Weer in {{ city }}</h1>
+
+    <input type="text" v-model="city" @change="fetchWeather" />
 
     <div v-if="loading">Laden...</div>
 

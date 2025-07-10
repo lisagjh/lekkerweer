@@ -9,14 +9,23 @@ const KEY = import.meta.env.VITE_API_KEY
 
 const fetchWeather = async () => {
   loading.value = true
+  weather.value = null
+
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=metric&appid=${KEY}`,
     )
+
     const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Onbekende fout')
+    }
+
     weather.value = data
   } catch (err) {
-    console.error('Fout bij ophalen weer:', err)
+    console.error('Fout bij ophalen weer:', err.message)
+    weather.value = { error: err.message }
   } finally {
     loading.value = false
   }
@@ -38,8 +47,12 @@ onMounted(fetchWeather)
       <p>Temp: {{ weather.main.temp }}°C</p>
     </div>
 
+    <div v-else-if="weather?.error">
+      <p style="color: red">‼️ {{ weather.error }}</p>
+    </div>
+
     <div v-else>
-      <p>Fout bij ophalen van weerdata 😓</p>
+      <p>Onbekende fout bij ophalen van weerdata 😓</p>
     </div>
   </main>
 </template>

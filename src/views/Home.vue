@@ -4,10 +4,17 @@ import { ref, onMounted } from 'vue'
 let city = ref('Amsterdam')
 const weather = ref(null)
 const loading = ref(true)
+const cityError = ref(null)
 
 const KEY = import.meta.env.VITE_API_KEY
 
 const fetchWeather = async () => {
+  cityError.value = null
+  if (!city.value) {
+    cityError.value = 'Voer een plaats in om het weer te zien.'
+    return
+  }
+
   loading.value = true
   weather.value = null
 
@@ -40,6 +47,8 @@ onMounted(fetchWeather)
 
     <input type="text" v-model="city" @change="fetchWeather" />
 
+    <p v-if="cityError" style="color: red">‼️ {{ cityError }}</p>
+
     <div v-if="loading">Laden...</div>
 
     <div v-else-if="weather?.weather && weather?.main">
@@ -49,6 +58,10 @@ onMounted(fetchWeather)
 
     <div v-else-if="weather?.error">
       <p style="color: red">‼️ {{ weather.error }}</p>
+    </div>
+
+    <div v-else-if="!city">
+      <p>Voer een plaats in om het weer te zien.</p>
     </div>
 
     <div v-else>
